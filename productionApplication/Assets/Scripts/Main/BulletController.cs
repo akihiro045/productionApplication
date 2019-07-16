@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+    void OnCollisionEnter(Collision other)
+    {
+        Destroy(gameObject);
+    }
     public void Shoot(Vector3 dir)
     {
         GetComponent<Rigidbody>().AddForce(dir);
@@ -17,6 +21,9 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (transform.position.x > 15.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
