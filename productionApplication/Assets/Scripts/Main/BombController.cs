@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    public void Shoot(Vector3 dir)
+    public void Throw(Vector3 dir)
     {
         GetComponent<Rigidbody>().AddForce(dir);
     }
@@ -24,7 +24,7 @@ public class BombController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Shoot(new Vector3(300, 300, 0));
+            Throw(new Vector3(300, 300, 0));
             GetComponent<Rigidbody>().useGravity = true;
         }
         if (transform.position.x > 15.0f || transform.position.y < 0)
