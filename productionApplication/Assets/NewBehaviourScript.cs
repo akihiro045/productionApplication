@@ -16,7 +16,7 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         keywords = new string[6][];
-        keywords[0] = new string[] { "りんご", "みに","みぎ","みみ","みり","いい" };//ひらがなでもカタカナでもいい
+        keywords[0] = new string[] { "りんご", "みに", "みぎ", "みみ", "みり", "いい" };//ひらがなでもカタカナでもいい
         keywords[1] = new string[] { "みかん", "オレンジ", "ひだり" };
         keywords[2] = new string[] { "もも", "ピーチ", "まえ" };//ひらがなでもカタカナでもいい
         keywords[3] = new string[] { "いちご", "ストロベリー", "うしろ" };
@@ -36,11 +36,15 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            this.GetComponent<Rigidbody>().AddForce(0.0f, 0.0f, 200.0f);
+        }
         if (keyCon.hasRecognized[0])//設定したKeywords[0]の単語らが認識されたらtrueになる
         {
             Debug.Log("keyword[0] was recognized");
             vector -= 0.1f;
-            if (this.transform.position.y > 0&& this.transform.position.z >-4.5)
+            if (this.transform.position.y > 0 && this.transform.position.z > -4.5)
             {
                 this.transform.position += new Vector3(0, 0, vector);
             }
