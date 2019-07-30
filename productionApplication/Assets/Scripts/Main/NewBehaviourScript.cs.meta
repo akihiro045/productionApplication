@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: 647bb3a213418be47a1545a1027f4805
+guid: e6aac953beeae2244acd115e63e1ccc0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
   - BulletPrefab: {fileID: 1426040918488865795, guid: 40662c73eaba5bd42a8041821db62ae7,
+      type: 3}
+  - BombPrefab: {fileID: 8118636642302333653, guid: 828b96f7550c8124283e880b9932c9a0,
       type: 3}
   - Player: {instanceID: 0}
   executionOrder: 0
