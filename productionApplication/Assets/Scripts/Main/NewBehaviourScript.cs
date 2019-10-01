@@ -14,6 +14,17 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject BombPrefab;
     public GameObject Player;
 
+    [SerializeField, Range(1, 8)]
+    private int m_useDisplayCount = 2;
+    void Awake()
+    {
+        int count = Mathf.Min(Display.displays.Length, m_useDisplayCount);
+
+        for (int i = 0; i < count; ++i)
+        {
+            Display.displays[i].Activate();
+        }
+    }
     // Use this for initialization
     void Start()
     {
@@ -28,8 +39,8 @@ public class NewBehaviourScript : MonoBehaviour
         keywords[6] = new string[] { "ばん", "だん", "ぱん" };
         keywords[7] = new string[] { "ドカン", "ボン", "ドン" };
 
-        keyCon = new KeywordController(keywords, true);//keywordControllerのインスタンスを作成
-        keyCon.SetKeywords();//KeywordRecognizerにkeywordsを設定する
+        keyCon = gameObject.AddComponent<KeywordController>();//keywordControllerのインスタンスを作成
+        keyCon.SetKeywords(keywords,true);//KeywordRecognizerにkeywordsを設定する
         keyCon.StartRecognizing(0);//シーン中で音声認識を始めたいときに呼び出す
         keyCon.StartRecognizing(1);
         keyCon.StartRecognizing(2);

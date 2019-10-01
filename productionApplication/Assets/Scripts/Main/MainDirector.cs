@@ -5,10 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class MainDirector : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField, Range(1, 8)]
+    private int m_useDisplayCount = 2;
+    void Awake()
+    {
+        int count = Mathf.Min(Display.displays.Length, m_useDisplayCount);
+
+        for (int i = 0; i < count; ++i)
+        {
+            Display.displays[i].Activate();
+        }
+    }
+    // Start is called before the first frame updat
     void Start()
     {
-
+    
     }
 
     // Update is called once per frame

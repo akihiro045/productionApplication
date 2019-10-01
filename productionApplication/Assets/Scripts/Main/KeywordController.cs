@@ -12,14 +12,15 @@ public class KeywordController : MonoBehaviour
     public KeywordRecognizer[] m_Recognizer;
     public bool ConsoleKeyword;//認識された単語をコンソールで表示するかしないか
 
-    public KeywordController(string[][] keywords, bool ConsoleKeyword)
+    public KeywordController()
+    {
+        
+    }
+
+    public void SetKeywords(string[][] keywords, bool ConsoleKeyword)
     {
         this.ConsoleKeyword = ConsoleKeyword;
         this.keywords = keywords;
-    }
-
-    public void SetKeywords()
-    {
         hasRecognized = new bool[keywords.Length];
         m_Recognizer = new KeywordRecognizer[keywords.Length];
         for (int i = 0; i < keywords.Length; i++)
