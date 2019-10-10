@@ -13,7 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject BulletPrefab;
     public GameObject BombPrefab;
     public GameObject Player;
-
+    private Vector3 temp; //仮
     [SerializeField, Range(1, 8)]
     private int m_useDisplayCount = 2;
     void Awake()
@@ -34,7 +34,7 @@ public class NewBehaviourScript : MonoBehaviour
         keywords[1] = new string[] { "みかん", "オレンジ", "ひだり" };
         keywords[2] = new string[] { "もも", "ピーチ", "まえ" };
         keywords[3] = new string[] { "いちご", "ストロベリー", "うしろ" };
-        keywords[4] = new string[] { "しゃがみ", "した", "しゃがめ" };
+        keywords[4] = new string[] { "ストップ", "した", "とまれ" };
         keywords[5] = new string[] { "たて", "たつ", "うえ" };
         keywords[6] = new string[] { "ばん", "だん", "ぱん" };
         keywords[7] = new string[] { "ドカン", "ボン", "ドン" };
@@ -63,65 +63,79 @@ public class NewBehaviourScript : MonoBehaviour
             //this.GetComponent<Rigidbody>().AddForce(0.0f, 0.0f, 600.0f,ForceMode.Acceleration);
         }
 
+        //キーボードデバッグ用
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            keyCon.hasRecognized[0] = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            keyCon.hasRecognized[1] = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            keyCon.hasRecognized[2] = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            keyCon.hasRecognized[3] = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            keyCon.hasRecognized[4] = true;
+        }
+        //音声
         if (keyCon.hasRecognized[0])//設定したKeywords[0]の単語らが認識されたらtrueになる
         {
             Debug.Log("keyword[0] was recognized");
-            vector -= 0.1f;
+            vector = -0.1f;
             if (this.transform.position.y > 0 && this.transform.position.z > -4.5)
             {
                 this.transform.position += new Vector3(0, 0, vector);
             }
-            if (vector == -0.5f)
-            {
-                vector = 0;
-                keyCon.hasRecognized[0] = false;
-            }
+            Debug.Log(this.transform.position.z);
+            //keyCon.hasRecognized[0] = false;
+
         }
         if (keyCon.hasRecognized[1])
         {
-            vector += 0.1f;
+            vector = 0.1f;
             Debug.Log("keyword[1] was recognized");
             if (this.transform.position.y > 0 && this.transform.position.z < 4.5)
             {
                 this.transform.position += new Vector3(0, 0, vector);
             }
-            if (vector == 0.5f)
-            {
-                vector = 0;
-                keyCon.hasRecognized[1] = false;
-            }
+            
+                //keyCon.hasRecognized[1] = false;
+            
         }
         if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
         {
-            vector += 0.1f;
+            vector = 0.1f;
             Debug.Log("keyword[2] was recognized");
             if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
             {
                 this.transform.position += new Vector3(vector, 0, 0);
             }
-            if (vector == 0.5f)
-            {
-                vector = 0;
-                keyCon.hasRecognized[2] = false;
-            }
+
+                //keyCon.hasRecognized[2] = false;
+            
         }
         if (keyCon.hasRecognized[3])
         {
-            vector -= 0.1f;
+            vector = -0.1f;
             Debug.Log("keyword[3] was recognized");
             if (this.transform.position.y > 0 && this.transform.position.x > -10)
             {
                 this.transform.position += new Vector3(vector, 0, 0);
             }
-            if (vector == -0.5f)
-            {
-                vector = 0;
-                keyCon.hasRecognized[3] = false;
-            }
+          
+                //keyCon.hasRecognized[3] = false;
+            
         }
         if (keyCon.hasRecognized[4])
         {
-            vector -= 0.1f;
+            /*vector -= 0.1f;
             Debug.Log("keyword[4] was recognized");
             if (this.transform.position.y > 0)
             {
@@ -132,7 +146,15 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 vector = 0;
                 keyCon.hasRecognized[4] = false;
-            }
+            }*/
+            keyCon.hasRecognized[0] = false;
+            keyCon.hasRecognized[1] = false;
+            keyCon.hasRecognized[2] = false;
+            keyCon.hasRecognized[3] = false;
+            keyCon.hasRecognized[4] = false;
+            keyCon.hasRecognized[5] = false;
+            keyCon.hasRecognized[6] = false;
+            keyCon.hasRecognized[7] = false;
         }
         if (keyCon.hasRecognized[5])
         {
