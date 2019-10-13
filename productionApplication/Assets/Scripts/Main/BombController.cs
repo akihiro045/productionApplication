@@ -12,7 +12,7 @@ public class BombController : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall")
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "Floor")

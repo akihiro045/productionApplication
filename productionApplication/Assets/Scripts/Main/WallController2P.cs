@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallController : MonoBehaviour
+public class WallController2P : MonoBehaviour
 {
     private int hp=3;
     void OnCollisionEnter(Collision other)
@@ -11,13 +11,13 @@ public class WallController : MonoBehaviour
         {
             GetComponent<Rigidbody>().isKinematic = true;
         }
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet2P")
         {
             hp--;
         }
-        if (other.gameObject.tag == "Bomb")
+        if (other.gameObject.tag == "Bomb2P")
         {
-            hp-=3;
+            hp -= 3;
         }
         if (hp <= 0)
             Destroy(gameObject);

@@ -16,19 +16,10 @@ public class NewBehaviourScript : MonoBehaviour
     private Vector3 temp; //仮
     [SerializeField, Range(1, 8)]
     private int m_useDisplayCount = 2;
-    void Awake()
-    {
-        int count = Mathf.Min(Display.displays.Length, m_useDisplayCount);
 
-        for (int i = 0; i < count; ++i)
-        {
-            Display.displays[i].Activate();
-        }
-    }
     // Use this for initialization
     void Start()
     {
-       
         keywords = new string[8][];
         keywords[0] = new string[] { "りんご", "みに","みぎ","みみ","みり","いい" };
         keywords[1] = new string[] { "みかん", "オレンジ", "ひだり" };
@@ -84,6 +75,14 @@ public class NewBehaviourScript : MonoBehaviour
         {
             keyCon.hasRecognized[4] = true;
         }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            keyCon.hasRecognized[6] = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.B))
+        {
+            keyCon.hasRecognized[7] = true;
+        }
         //音声
         if (keyCon.hasRecognized[0])//設定したKeywords[0]の単語らが認識されたらtrueになる
         {
@@ -135,8 +134,9 @@ public class NewBehaviourScript : MonoBehaviour
         }
         if (keyCon.hasRecognized[4])
         {
-            /*vector -= 0.1f;
             Debug.Log("keyword[4] was recognized");
+            /*vector -= 0.1f;
+            
             if (this.transform.position.y > 0)
             {
                 this.transform.position += new Vector3(0, vector, 0);
