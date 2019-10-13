@@ -14,7 +14,7 @@ public class KeywordController : MonoBehaviour
 
     public KeywordController()
     {
-        
+
     }
 
     public void SetKeywords(string[][] keywords, bool ConsoleKeyword)
