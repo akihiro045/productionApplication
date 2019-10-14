@@ -12,12 +12,13 @@ public class NewBehaviourScript : MonoBehaviour
     private float vector;
     public GameObject BulletPrefab;
     public GameObject BombPrefab;
-    public GameObject Player;
+    public GameObject Player1;
+    public GameObject Player2;
     private Vector3 temp; //仮
     [SerializeField, Range(1, 8)]
     private int m_useDisplayCount = 2;
 
-    void SetKeyword()
+    public void SetKeyword()
     {
         keywords = new string[8][];
         keywords[0] = new string[] { "りんご", "みに", "みぎ", "みみ", "みり", "いい" };
@@ -39,7 +40,6 @@ public class NewBehaviourScript : MonoBehaviour
         keyCon.StartRecognizing(5);
         keyCon.StartRecognizing(6);
         keyCon.StartRecognizing(7);
-
     }
 
     void MoveFront()
@@ -133,7 +133,7 @@ public class NewBehaviourScript : MonoBehaviour
     void ThrowBomb()
     {
         GameObject Bomb = Instantiate(BombPrefab, this.transform.position, Quaternion.identity);
-        //Bomb.transform.parent = Player.transform;
+        //Bomb.transform.parent = this.transform;
         Bomb.transform.position = this.transform.position;
         Bomb.transform.position += new Vector3(1.5f, 0, 0);
         Bomb.GetComponent<BombController>().Throw(new Vector3(300, 300, 0));
@@ -222,6 +222,12 @@ public class NewBehaviourScript : MonoBehaviour
         #region 2プレイヤー分回すのでどこか別の場所に書く
         SetKeyword();
         #endregion
+        Player1 = GameObject.Find("Cube.006");
+        Player2 = GameObject.Find("Cube.007");
+        foreach (string device in Microphone.devices)
+        {
+            Debug.Log("Name: " + device);
+        }
     }
 
     // Update is called once per frame
@@ -229,7 +235,68 @@ public class NewBehaviourScript : MonoBehaviour
     {
         //キーボードデバッグ用
         KeyboardController();
+        foreach (string device in Microphone.devices)
+        {
+            if (device == "マイク (Realtek(R) Audio)")//内部の処理はぶっつけ
+            {
+                Debug.Log("Realtek(R)");
+                if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+                {
+                    Debug.Log("keyword[2] was recognized");
+                    vector = 0.1f;
+                    if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+                    {
+                        this.transform.position += new Vector3(vector, 0, 0);
+                    }
+                }
+            }
+            else if (device == "マイク (USB PnP Sound Device)")
+            {
+                Debug.Log("USB");
+                if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+                {
+                    Debug.Log("keyword[2] was recognized");
+                    vector = 0.1f;
+                    if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+                    {
+                        this.transform.position += new Vector3(vector, 0, 0);
+                    }
+                }
+            }
+            // switch (device)
+            // {
+            //     case "Realtek(R) Audio":
+            //         Debug.Log("Realtek(R)");
+            //         if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+            //         {
+            //             Debug.Log("keyword[2] was recognized");
+            //             vector = 0.1f;
+            //             if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+            //             {
+            //                 this.transform.position += new Vector3(vector, 0, 0);
+            //             }
+            //         }
+
+            //         // VoiceController(Player1);
+            //         break;
+            //     case "USB PnP Sound Device":
+            //         Debug.Log("USB");
+            //         VoiceController();
+            //         break;
+            // }
+        }
+        if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+        {
+            Debug.Log("default");
+            Debug.Log("keyword[2] was recognized");
+            vector = 0.1f;
+            if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+            {
+                this.transform.position += new Vector3(vector, 0, 0);
+            }
+        }
+
         //音声
-        VoiceController();
+        //VoiceController();
     }
 }
