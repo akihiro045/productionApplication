@@ -17,12 +17,14 @@ public class NewBehaviourScript : MonoBehaviour
     private Vector3 temp; //仮
     [SerializeField, Range(1, 8)]
     private int m_useDisplayCount = 2;
+    bool setF = false;
 
     public void SetKeyword()
     {
         keywords = new string[8][];
-        keywords[0] = new string[] { "りんご", "みに", "みぎ", "みみ", "みり", "いい" };
-        keywords[1] = new string[] { "みかん", "オレンジ", "ひだり" };
+        //ここ｛｝を変更
+        keywords[0] = new string[] { "りんご", "みに", "みぎ", "みみ", "みり", "いい", "right" };
+        keywords[1] = new string[] { "みかん", "オレンジ", "ひだり", "left" };
         keywords[2] = new string[] { "もも", "ピーチ", "まえ" };
         keywords[3] = new string[] { "いちご", "ストロベリー", "うしろ" };
         keywords[4] = new string[] { "ストップ", "した", "とまれ" };
@@ -40,6 +42,7 @@ public class NewBehaviourScript : MonoBehaviour
         keyCon.StartRecognizing(5);
         keyCon.StartRecognizing(6);
         keyCon.StartRecognizing(7);
+        setF = true;
     }
 
     void MoveFront()
@@ -220,7 +223,10 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         #region 2プレイヤー分回すのでどこか別の場所に書く
-        SetKeyword();
+        if (!setF)
+        {
+            SetKeyword();
+        }
         #endregion
         Player1 = GameObject.Find("Cube.006");
         Player2 = GameObject.Find("Cube.007");
@@ -239,62 +245,55 @@ public class NewBehaviourScript : MonoBehaviour
         {
             if (device == "マイク (Realtek(R) Audio)")//内部の処理はぶっつけ
             {
-                Debug.Log("Realtek(R)");
-                if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
-                {
-                    Debug.Log("keyword[2] was recognized");
-                    vector = 0.1f;
-                    if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
-                    {
-                        this.transform.position += new Vector3(vector, 0, 0);
-                    }
-                }
+                VoiceController();
+
+                //Debug.Log("Realtek(R)");
+                //if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+                //{
+                //    Debug.Log("keyword[2] was recognized");
+                //    vector = 0.1f;
+                //    if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+                //    {
+                //        this.transform.position += new Vector3(vector, 0, 0);
+                //    }
+                //}
             }
             else if (device == "マイク (USB PnP Sound Device)")
             {
-                Debug.Log("USB");
-                if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
-                {
-                    Debug.Log("keyword[2] was recognized");
-                    vector = 0.1f;
-                    if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
-                    {
-                        this.transform.position += new Vector3(vector, 0, 0);
-                    }
-                }
-            }
-            // switch (device)
-            // {
-            //     case "Realtek(R) Audio":
-            //         Debug.Log("Realtek(R)");
-            //         if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
-            //         {
-            //             Debug.Log("keyword[2] was recognized");
-            //             vector = 0.1f;
-            //             if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
-            //             {
-            //                 this.transform.position += new Vector3(vector, 0, 0);
-            //             }
-            //         }
+                VoiceController();
 
-            //         // VoiceController(Player1);
-            //         break;
-            //     case "USB PnP Sound Device":
-            //         Debug.Log("USB");
-            //         VoiceController();
-            //         break;
-            // }
-        }
-        if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
-        {
-            Debug.Log("default");
-            Debug.Log("keyword[2] was recognized");
-            vector = 0.1f;
-            if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
-            {
-                this.transform.position += new Vector3(vector, 0, 0);
+                //Debug.Log("USB");
+                //if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+                //{
+                //    Debug.Log("keyword[2] was recognized");
+                //    vector = -0.1f;
+                //    if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+                //    {
+                //        this.transform.position += new Vector3(vector, 0, 0);
+                //    }
             }
         }
+        // switch (device)
+        // {
+        //     case "Realtek(R) Audio":
+        //         Debug.Log("Realtek(R)");
+        //         if (keyCon.hasRecognized[2])//設定したKeywords[0]の単語らが認識されたらtrueになる
+        //         {
+        //             Debug.Log("keyword[2] was recognized");
+        //             vector = 0.1f;
+        //             if (this.transform.position.y > 0 && this.transform.position.x < -1.1)
+        //             {
+        //                 this.transform.position += new Vector3(vector, 0, 0);
+        //             }
+        //         }
+
+        //         // VoiceController(Player1);
+        //         break;
+        //     case "USB PnP Sound Device":
+        //         Debug.Log("USB");
+        //         VoiceController();
+        //         break;
+        // }
 
         //音声
         //VoiceController();
