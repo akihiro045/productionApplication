@@ -7,6 +7,8 @@ public class MainDirector : MonoBehaviour
 {
     [SerializeField, Range(1, 8)]
     private int m_useDisplayCount = 2;
+
+    public NewBehaviourScript script;
     void Awake()
     {
         int count = Mathf.Min(Display.displays.Length, m_useDisplayCount);
@@ -16,10 +18,11 @@ public class MainDirector : MonoBehaviour
             Display.displays[i].Activate();
         }
     }
-    // Start is called before the first frame updat
+    // Start is called before the first frame update
     void Start()
     {
-    
+        // script = new NewBehaviourScript();
+        // script.SetKeyword();
     }
 
     // Update is called once per frame

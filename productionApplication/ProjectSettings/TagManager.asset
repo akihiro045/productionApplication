@@ -8,6 +8,8 @@ TagManager:
   - Bomb
   - Wall
   - Floor
+  - Bullet2P
+  - Bomb2P
   layers:
   - Default
   - TransparentFX
