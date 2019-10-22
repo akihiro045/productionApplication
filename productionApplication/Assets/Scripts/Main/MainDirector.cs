@@ -9,11 +9,11 @@ public class cUI
     public GameObject gCanvas;
     public GameObject gHP;
     public GameObject gBomb;
+    public GameObject gResult;
 
     public int iHP = 3;
     public int bombCount = 3;
-    //TODO : テキストUIの名前変更
-    public void HPTextController()
+    public void HPTextIndicate()
     {
         switch (iHP)
         {
@@ -30,10 +30,9 @@ public class cUI
                 this.gHP.GetComponent<Text>().text = "たいりょく ";
                 break;
         }
-
     }
 
-    public void BombTextController()
+    public void BombTextIndicate()
     {
         switch (bombCount)
         {
@@ -50,7 +49,20 @@ public class cUI
                 this.gBomb.GetComponent<Text>().text = "ば";
                 break;
         }
+    }
 
+    public void ResultTextIndicate(int hp)
+    {
+        if (hp > 0)
+        {
+            this.gResult.GetComponent<Text>().text = "う　ぃ　ん";
+        }
+        else if (hp < 1)
+        {
+            this.gResult.GetComponent<Text>().text = "る　－　ず";
+        }
+
+        SceneManager.LoadScene("TitleScene");
     }
 }
 
@@ -73,10 +85,12 @@ public class MainDirector : MonoBehaviour
         p1UI.gCanvas = GameObject.Find("player1UI");
         p1UI.gHP = GameObject.Find("player1HP");
         p1UI.gBomb = GameObject.Find("player1RemainingBomb");
+        p1UI.gResult = GameObject.Find("player1Result");
 
         p2UI.gCanvas = GameObject.Find("player2UI");
         p2UI.gHP = GameObject.Find("player2HP");
         p2UI.gBomb = GameObject.Find("player2RemainingBomb");
+        p2UI.gResult = GameObject.Find("player2Result");
     }
 
     void MigrationResult()
@@ -118,13 +132,19 @@ public class MainDirector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Slash))
             p1UI.bombCount--;
 
-        if (Input.GetKeyDown(KeyCode.Slash) && Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.F))
             p2UI.bombCount--;
 
-        p1UI.HPTextController();
-        p2UI.HPTextController();
+        p1UI.HPTextIndicate();
+        p2UI.HPTextIndicate();
         #endregion
-        p1UI.BombTextController();
-        p2UI.BombTextController();
+        p1UI.BombTextIndicate();
+        p2UI.BombTextIndicate();
+
+        if (p1UI.iHP < 1 || p2UI.iHP < 1)
+        {
+            p1UI.ResultTextIndicate(p1UI.iHP);
+            p2UI.ResultTextIndicate(p2UI.iHP);
+        }
     }
 }
