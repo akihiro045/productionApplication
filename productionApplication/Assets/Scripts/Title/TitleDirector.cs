@@ -16,7 +16,7 @@ public class TitleDirector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SceneManager.LoadScene("1010");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

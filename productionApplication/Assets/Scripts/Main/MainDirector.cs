@@ -30,7 +30,6 @@ public class cUI
                 this.gHP.GetComponent<Text>().text = "たいりょく ";
                 break;
         }
-
     }
 
     public void BombTextIndicate()
@@ -52,10 +51,19 @@ public class cUI
         }
     }
 
-    // public void ResultTextIndicate(cUI player)
-    // {
-    //     if(player.iHP)
-    // }
+    public void ResultTextIndicate(int hp)
+    {
+        if (hp > 0)
+        {
+            this.gResult.GetComponent<Text>().text = "う　ぃ　ん";
+        }
+        else if (hp < 1)
+        {
+            this.gResult.GetComponent<Text>().text = "る　－　ず";
+        }
+
+        SceneManager.LoadScene("TitleScene");
+    }
 }
 
 
@@ -133,16 +141,10 @@ public class MainDirector : MonoBehaviour
         p1UI.BombTextIndicate();
         p2UI.BombTextIndicate();
 
-        // TODO : リザルトが表示されない　クラスに移す？
-        if (1 > p1UI.iHP)
+        if (p1UI.iHP < 1 || p2UI.iHP < 1)
         {
-            p1UI.gResult.AddComponent<Text>().text = "う　ぃ　ん";
-            p2UI.gResult.AddComponent<Text>().text = "る　－　ず";
-        }
-        else if (1 > p2UI.iHP)
-        {
-            p2UI.gResult.AddComponent<Text>().text = "う　ぃ　ん";
-            p1UI.gResult.AddComponent<Text>().text = "る　－　ず";
+            p1UI.ResultTextIndicate(p1UI.iHP);
+            p2UI.ResultTextIndicate(p2UI.iHP);
         }
     }
 }
