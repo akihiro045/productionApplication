@@ -13,45 +13,45 @@ public class cUI
 
     public int iHP = 3;
     public int bombCount = 3;
-    public void HPTextIndicate()
+    public void HPTextIndicate(int hp)
     {
-        switch (iHP)
+        switch (hp)
         {
             case 3:
-                this.gHP.GetComponent<Text>().text = "たいりょく ■ ■ ■";
+                this.gHP.GetComponent<Text>().text = "たいりょく■　■　■";
                 break;
             case 2:
-                this.gHP.GetComponent<Text>().text = "たいりょく ■ ■";
+                this.gHP.GetComponent<Text>().text = "たいりょく■　■";
                 break;
             case 1:
-                this.gHP.GetComponent<Text>().text = "たいりょく ■";
+                this.gHP.GetComponent<Text>().text = "たいりょく■";
                 break;
             case 0:
-                this.gHP.GetComponent<Text>().text = "たいりょく ";
+                this.gHP.GetComponent<Text>().text = "たいりょく";
                 break;
         }
     }
 
-    public void BombTextIndicate()
+    public void BombTextIndicate(int count)
     {
-        switch (bombCount)
+        switch (count)
         {
             case 3:
-                this.gBomb.GetComponent<Text>().text = "ば　く　だ　ん";
+                this.gBomb.GetComponent<Text>().text = "ばくだん　●　●　●";
                 break;
             case 2:
-                this.gBomb.GetComponent<Text>().text = "ば　く　だ";
+                this.gBomb.GetComponent<Text>().text = "ばくだん　●　●";
                 break;
             case 1:
-                this.gBomb.GetComponent<Text>().text = "ば　く";
+                this.gBomb.GetComponent<Text>().text = "ばくだん　●";
                 break;
             case 0:
-                this.gBomb.GetComponent<Text>().text = "ば";
+                this.gBomb.GetComponent<Text>().text = "ばくだん";
                 break;
         }
     }
 
-    public void ResultTextIndicate(int hp)
+    public void ResultTextIndicate(int hp, int time)
     {
         if (hp > 0)
         {
@@ -62,7 +62,8 @@ public class cUI
             this.gResult.GetComponent<Text>().text = "る　－　ず";
         }
 
-        SceneManager.LoadScene("TitleScene");
+        if (time > 5000)
+            SceneManager.LoadScene("TitleScene");
     }
 }
 
@@ -76,9 +77,21 @@ public class MainDirector : MonoBehaviour
     cUI p1UI;
     cUI p2UI;
 
+    public CharacterVoiceController mainPlayer;
+    public CharacterVoiceController com;
+
+    AudioSource audio;
+
+    public AudioClip gunSE;
+    public AudioClip bombSE;
+    public AudioClip moveSE;
+    public AudioClip finishSE;
+    private int time;
+    bool finishF;
 
     public void SetUI()
     {
+
         p1UI = new cUI();
         p2UI = new cUI();
 
@@ -93,13 +106,6 @@ public class MainDirector : MonoBehaviour
         p2UI.gResult = GameObject.Find("player2Result");
     }
 
-    void MigrationResult()
-    {
-        //いずれはリザルト画面に移行
-    }
-
-
-
     void Awake()
     {
         int count = Mathf.Min(Display.displays.Length, m_useDisplayCount);
@@ -113,6 +119,10 @@ public class MainDirector : MonoBehaviour
     void Start()
     {
         SetUI();
+
+        audio = GetComponent<AudioSource>();
+        finishF = false;
+        time = 0;
     }
 
     // Update is called once per frame
@@ -123,11 +133,11 @@ public class MainDirector : MonoBehaviour
             SceneManager.LoadScene("TitleScene");
         }
         #region プレイヤーのHPが減ったら動くようにする
-        if (Input.GetKeyDown(KeyCode.G))
-            p1UI.iHP--;
+        if (Input.GetKeyDown(KeyCode.P))
+            mainPlayer.playerHp--;
 
         if (Input.GetKeyDown(KeyCode.Q))
-            p2UI.iHP--;
+            com.playerHp--;
 
         if (Input.GetKeyDown(KeyCode.Slash))
             p1UI.bombCount--;
@@ -135,16 +145,20 @@ public class MainDirector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
             p2UI.bombCount--;
 
-        p1UI.HPTextIndicate();
-        p2UI.HPTextIndicate();
+        p1UI.HPTextIndicate(mainPlayer.playerHp);
+        //p2UI.HPTextIndicate();
         #endregion
-        p1UI.BombTextIndicate();
-        p2UI.BombTextIndicate();
+        p1UI.BombTextIndicate(mainPlayer.countBomb);
+        //p2UI.BombTextIndicate();
 
-        if (p1UI.iHP < 1 || p2UI.iHP < 1)
+        if (mainPlayer.playerHp < 1 || com.playerHp < 1)
         {
-            p1UI.ResultTextIndicate(p1UI.iHP);
-            p2UI.ResultTextIndicate(p2UI.iHP);
+            // if (!finishF)
+            //     audio.PlayOneShot(finishSE);
+            // finishF = true;
+            p1UI.ResultTextIndicate(mainPlayer.playerHp, time);
+            p2UI.ResultTextIndicate(com.playerHp, time);
+            time++;
         }
     }
 }

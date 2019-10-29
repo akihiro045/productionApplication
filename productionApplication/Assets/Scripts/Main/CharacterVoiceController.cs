@@ -7,6 +7,9 @@ public class CharacterVoiceController : MonoBehaviour
     public Vector3 temp;//仮
     public Vector3 oldPosition;
     public GameObject Player;
+
+    public int playerHp=3;
+    public int countBomb = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +89,11 @@ public class CharacterVoiceController : MonoBehaviour
                 temp = oldPosition;
             }
         }
+        if(other.gameObject.tag=="Bullet"||other.gameObject.tag=="Bullet2P"||other.gameObject.tag=="Bomb"||other.gameObject.tag=="Bomb2P")
+        {
+            playerHp--;
+        }
+   
     }
     // Update is called once per frame
     void Update()

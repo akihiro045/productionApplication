@@ -12,12 +12,12 @@ public class VoiceRecognize : MonoBehaviour
     void Start()
     {
         keywords = new string[8][];
-        keywords[0] = new string[] { "りんご", "みに", "みぎ", "みみ", "みり", "いい" };
-        keywords[1] = new string[] { "みかん", "オレンジ", "ひだり" };
+        keywords[0] = new string[] { "りんご", "みに", "みぎ", "みみ", "みり", "いい", "ライト" };
+        keywords[1] = new string[] { "みかん", "オレンジ", "ひだり", "レフト"};
         keywords[2] = new string[] { "もも", "ピーチ", "まえ" };
         keywords[3] = new string[] { "いちご", "ストロベリー", "うしろ" };
         keywords[4] = new string[] { "ストップ", "した", "とまれ" };
-        keywords[5] = new string[] { "たて", "たつ", "うえ" };
+        keywords[5] = new string[] {  "くぁせふじこ" };
         keywords[6] = new string[] { "ばん", "だん", "ぱん" };
         keywords[7] = new string[] { "ドカン", "ボン", "ドン" };
 

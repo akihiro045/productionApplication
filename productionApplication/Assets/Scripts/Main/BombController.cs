@@ -10,15 +10,11 @@ public class BombController : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Wall")
-        {
-            //Destroy(other.gameObject);
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "Floor")
-        {
-            Destroy(gameObject);
-        }
+       
+     //Destroy(other.gameObject);]
+       GetComponent<Rigidbody>().isKinematic = true;
+        Destroy(gameObject);
+        
     }
     // Start is called before the first frame update
     void Start()
