@@ -3,18 +3,17 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
-
 public class KeywordController : MonoBehaviour
 {
 
-    public string[][] keywords;//認識したい単語を二次元配列で記録
+    public string[][] keywords; //認識したい単語を二次元配列で記録
     public bool[] hasRecognized;
     public KeywordRecognizer[] m_Recognizer;
-    public bool ConsoleKeyword;//認識された単語をコンソールで表示するかしないか
+    public bool ConsoleKeyword; //認識された単語をコンソールで表示するかしないか
 
     public KeywordController()
     {
-        
+
     }
 
     public void SetKeywords(string[][] keywords, bool ConsoleKeyword)
