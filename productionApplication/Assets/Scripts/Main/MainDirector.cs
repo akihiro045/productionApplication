@@ -11,8 +11,8 @@ public class cUI
     public GameObject gBomb;
     public GameObject gResult;
 
-    public int iHP = 3;
     public int bombCount = 3;
+
     public void HPTextIndicate(int hp)
     {
         switch (hp)
@@ -89,6 +89,9 @@ public class MainDirector : MonoBehaviour
     private int time;
     bool finishF;
 
+    private int playerHP;
+    private int enemyHP;
+
     public void SetUI()
     {
 
@@ -104,6 +107,8 @@ public class MainDirector : MonoBehaviour
         p2UI.gHP = GameObject.Find("player2HP");
         p2UI.gBomb = GameObject.Find("player2RemainingBomb");
         p2UI.gResult = GameObject.Find("player2Result");
+
+        playerHP = CharacterVoiceController.GetHP();
     }
 
     void Awake()
@@ -134,31 +139,34 @@ public class MainDirector : MonoBehaviour
         }
         #region プレイヤーのHPが減ったら動くようにする
         if (Input.GetKeyDown(KeyCode.P))
-            mainPlayer.playerHp--;
-
+        {
+            CharacterVoiceController.DamageHp();
+            playerHP--;
+        }
         if (Input.GetKeyDown(KeyCode.Q))
-            com.playerHp--;
+            //com.playerHp--;
 
-        if (Input.GetKeyDown(KeyCode.Slash))
-            p1UI.bombCount--;
+            if (Input.GetKeyDown(KeyCode.Slash))
+                p1UI.bombCount--;
 
         if (Input.GetKeyDown(KeyCode.F))
             p2UI.bombCount--;
 
-        p1UI.HPTextIndicate(mainPlayer.playerHp);
+        p1UI.HPTextIndicate(playerHP);
         //p2UI.HPTextIndicate();
         #endregion
         p1UI.BombTextIndicate(mainPlayer.countBomb);
         //p2UI.BombTextIndicate();
 
-        if (mainPlayer.playerHp < 1 || com.playerHp < 1)
+        if (playerHP < 1)
         {
             // if (!finishF)
             //     audio.PlayOneShot(finishSE);
             // finishF = true;
-            p1UI.ResultTextIndicate(mainPlayer.playerHp, time);
-            p2UI.ResultTextIndicate(com.playerHp, time);
-            time++;
+
+
+            //DontDestroyOnLoad();
+            SceneManager.LoadScene("Result");
         }
     }
 }

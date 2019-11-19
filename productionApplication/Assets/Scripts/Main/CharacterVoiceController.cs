@@ -8,7 +8,8 @@ public class CharacterVoiceController : MonoBehaviour
     public Vector3 oldPosition;
     public GameObject Player;
 
-    public int playerHp=3;
+    public static int playerHp = 3;
+
     public int countBomb = 3;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class CharacterVoiceController : MonoBehaviour
         FindPlayer(gameObject.tag);
 
         temp = Player.transform.position;
-        oldPosition= Player.transform.position;
+        oldPosition = Player.transform.position;
 
     }
 
@@ -37,7 +38,7 @@ public class CharacterVoiceController : MonoBehaviour
         switch (direction)
         {
             case 0:
-                if (temp.z > -4.5f&&gameObject.tag=="Player")
+                if (temp.z > -4.5f && gameObject.tag == "Player")
                 {
                     temp.z -= 0.75f;
                 }
@@ -84,20 +85,29 @@ public class CharacterVoiceController : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall")
         {
-            if (gameObject.tag == "Player"||gameObject.tag=="Player2P")
+            if (gameObject.tag == "Player" || gameObject.tag == "Player2P")
             {
                 temp = oldPosition;
             }
         }
-        if(other.gameObject.tag=="Bullet"||other.gameObject.tag=="Bullet2P"||other.gameObject.tag=="Bomb"||other.gameObject.tag=="Bomb2P")
+        if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet2P" || other.gameObject.tag == "Bomb" || other.gameObject.tag == "Bomb2P")
         {
             playerHp--;
         }
-   
+
     }
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public static int GetHP()
+    {
+        return playerHp;
+    }
+    public static void DamageHp()
+    {
+        playerHp--;
     }
 }

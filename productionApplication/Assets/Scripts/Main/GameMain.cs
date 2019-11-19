@@ -17,7 +17,7 @@ public class GameMain : MonoBehaviour
     public VoiceRecognize voiceRecognize;
     private int loopCount;
 
-    private int delayCount=0;
+    private int delayCount = 0;
     private int[] voiceResult = { -1, -1 };//音声認識で何が認識されたか返す
     //[SerializeField, Range(1, 8)]
     //private int m_useDisplayCount = 2;
@@ -42,7 +42,7 @@ public class GameMain : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     void PlayerAction(int i)
@@ -53,14 +53,14 @@ public class GameMain : MonoBehaviour
         }
         if (voiceResult[i] == 6)
         {
-            if(i==0)
+            if (i == 0)
             {
                 GameObject Bullet = Instantiate(BulletPrefab) as GameObject;
                 Bullet.transform.position = characterVoiceController[i].Player.transform.position;
                 Bullet.transform.position += new Vector3(1.0f, 0.5f, 0);
                 Bullet.GetComponent<BulletController>().Shoot(new Vector3(1000, 0, 0));
             }
-            else if(i==1)
+            else if (i == 1)
             {
                 GameObject Bullet = Instantiate(BulletPrefab2) as GameObject;
                 Bullet.transform.position = characterVoiceController[i].Player.transform.position;
@@ -70,14 +70,14 @@ public class GameMain : MonoBehaviour
         }
         if (voiceResult[i] == 7 && characterVoiceController[i].countBomb > 0)
         {
-            if(i==0)
+            if (i == 0)
             {
                 GameObject Bomb = Instantiate(BombPrefab, characterVoiceController[i].Player.transform.position, Quaternion.identity);
                 Bomb.transform.position = characterVoiceController[i].Player.transform.position;
                 Bomb.transform.position += new Vector3(1.0f, 0.5f, 0);
                 Bomb.GetComponent<BombController>().Throw(new Vector3(300, 0, 0));
             }
-            else if(i==1)
+            else if (i == 1)
             {
                 GameObject Bomb = Instantiate(BombPrefab2, characterVoiceController[i].Player.transform.position, Quaternion.identity);
                 Bomb.transform.position = characterVoiceController[i].Player.transform.position;
@@ -91,7 +91,7 @@ public class GameMain : MonoBehaviour
 
     void PlayerMoving(int i)
     {
-          characterVoiceController[i].Player.transform.position = Vector3.MoveTowards(characterVoiceController[i].Player.transform.position, characterVoiceController[i].temp, 2.0f * Time.deltaTime);
+        characterVoiceController[i].Player.transform.position = Vector3.MoveTowards(characterVoiceController[i].Player.transform.position, characterVoiceController[i].temp, 2.0f * Time.deltaTime);
     }
 
     // Update is called once per frame
@@ -100,23 +100,23 @@ public class GameMain : MonoBehaviour
     {
         loopCount = 0;
         //foreach (string device in Microphone.devices)
-        for(loopCount=0;loopCount<2;loopCount++)
+        for (loopCount = 0; loopCount < 2; loopCount++)
         {
             //Debug.Log(loopCount);
             if (characterVoiceController[loopCount].Player.transform.position == characterVoiceController[loopCount].temp)
-            {            
+            {
                 voiceRecognize.KeyBoardController(loopCount);
                 voiceRecognize.VoiceController(loopCount);
-                if(loopCount==0)
+                if (loopCount == 0)
                 {
                     voiceResult[loopCount] = voiceRecognize.result;
                 }
-                else if(loopCount==1)
+                else if (loopCount == 1)
                 {
-                    if(delayCount==200)
+                    if (delayCount == 200)
                     {
-                        delayCount=0;
-                        voiceResult[loopCount] = Random.Range(0,8);
+                        delayCount = 0;
+                        voiceResult[loopCount] = Random.Range(0, 8);
                         //voiceResult[loopCount] = 2;
                     }
                     else
@@ -128,7 +128,7 @@ public class GameMain : MonoBehaviour
                 }
                 PlayerAction(loopCount);
                 characterVoiceController[loopCount].oldPosition = characterVoiceController[loopCount].Player.transform.position;
-            
+
             }
             else
             {
