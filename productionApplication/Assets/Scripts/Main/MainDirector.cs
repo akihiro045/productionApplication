@@ -89,8 +89,8 @@ public class MainDirector : MonoBehaviour
     private int time;
     bool finishF;
 
-    private int playerHP;
-    private int enemyHP;
+    public static int playerHP = 3;
+    public static int enemyHP = 3;
 
     public void SetUI()
     {
@@ -108,9 +108,25 @@ public class MainDirector : MonoBehaviour
         p2UI.gBomb = GameObject.Find("player2RemainingBomb");
         p2UI.gResult = GameObject.Find("player2Result");
 
-        playerHP = CharacterVoiceController.GetHP();
     }
 
+    public int GetPlayerHP()
+    {
+        return playerHP;
+    }
+    public int GetEnemyHP()
+    {
+        return enemyHP;
+    }
+
+    public int DamagePlayerHP()
+    {
+        return playerHP--;
+    }
+    public int DamageEnemyHP()
+    {
+        return enemyHP--;
+    }
     void Awake()
     {
         int count = Mathf.Min(Display.displays.Length, m_useDisplayCount);
@@ -140,25 +156,27 @@ public class MainDirector : MonoBehaviour
         #region プレイヤーのHPが減ったら動くようにする
         if (Input.GetKeyDown(KeyCode.P))
         {
-            CharacterVoiceController.DamageHp();
-            playerHP--;
+            DamagePlayerHP();
         }
         if (Input.GetKeyDown(KeyCode.Q))
-            //com.playerHp--;
+        {
+            com.playerHp--;
+            DamageEnemyHP();
+        }
+        if (Input.GetKeyDown(KeyCode.Slash))
 
-            if (Input.GetKeyDown(KeyCode.Slash))
-                p1UI.bombCount--;
+            p1UI.bombCount--;
 
         if (Input.GetKeyDown(KeyCode.F))
             p2UI.bombCount--;
 
-        p1UI.HPTextIndicate(playerHP);
+        p1UI.HPTextIndicate(GetPlayerHP());
         //p2UI.HPTextIndicate();
         #endregion
         p1UI.BombTextIndicate(mainPlayer.countBomb);
         //p2UI.BombTextIndicate();
 
-        if (playerHP < 1)
+        if (playerHP < 1 || enemyHP < 1)
         {
             // if (!finishF)
             //     audio.PlayOneShot(finishSE);
@@ -168,5 +186,6 @@ public class MainDirector : MonoBehaviour
             //DontDestroyOnLoad();
             SceneManager.LoadScene("Result");
         }
+
     }
 }

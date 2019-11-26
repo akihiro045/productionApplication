@@ -29,6 +29,15 @@ public class ResultDirector : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("hp : " + CharacterVoiceController.GetHP());
+        Debug.Log("hp : ");
+
+        if (MainDirector.playerHP > 0)
+        {
+            Debug.Log("win");
+        }
+        else
+        {
+            Debug.Log("lose");
+        }
     }
 }

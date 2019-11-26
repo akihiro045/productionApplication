@@ -25,8 +25,8 @@ public class GameMain : MonoBehaviour
     private void Awake()
     {
         Player = new GameObject[2];
-        Player[0] = GameObject.Find("Cube.006");
-        Player[1] = GameObject.Find("Cube.007");
+        Player[0] = GameObject.Find("Player1");
+        Player[1] = GameObject.Find("Player2");
         characterVoiceController = new CharacterVoiceController[2];
         characterVoiceController[0] = Player[0].GetComponent<CharacterVoiceController>();
         characterVoiceController[1] = Player[1].GetComponent<CharacterVoiceController>();

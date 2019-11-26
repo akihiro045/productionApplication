@@ -87,13 +87,13 @@ public class TitleDirector : MonoBehaviour
     {
         index = 0;
         p1UI = new cTitleUI();
-        p2UI = new cTitleUI();
+        //p2UI = new cTitleUI();
 
         p1UI.gStart = GameObject.Find("Start1");
         p1UI.gExit = GameObject.Find("Exit1");
 
-        p2UI.gStart = GameObject.Find("Start2");
-        p2UI.gExit = GameObject.Find("Exit2");
+        // p2UI.gStart = GameObject.Find("Start2");
+        // p2UI.gExit = GameObject.Find("Exit2");
     }
     void Start()
     {
@@ -107,7 +107,7 @@ public class TitleDirector : MonoBehaviour
         index = p1UI.Index(index);
 
         p1UI.UIIndicate(index);
-        p2UI.UIIndicate(index);
+        //p2UI.UIIndicate(index);
 
         p1UI.MigrationScene(index, audio, choseSE);
 

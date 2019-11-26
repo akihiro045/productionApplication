@@ -8,8 +8,7 @@ public class CharacterVoiceController : MonoBehaviour
     public Vector3 oldPosition;
     public GameObject Player;
 
-    public static int playerHp = 3;
-
+    public int playerHp = 3;
     public int countBomb = 3;
     // Start is called before the first frame update
     void Start()
@@ -25,11 +24,11 @@ public class CharacterVoiceController : MonoBehaviour
     {
         if (tagName == "Player")
         {
-            Player = GameObject.Find("Cube.006");
+            Player = GameObject.Find("Player1");
         }
         else if (tagName == "Player2P")
         {
-            Player = GameObject.Find("Cube.007");
+            Player = GameObject.Find("Player2");
         }
     }
 
@@ -102,12 +101,4 @@ public class CharacterVoiceController : MonoBehaviour
 
     }
 
-    public static int GetHP()
-    {
-        return playerHp;
-    }
-    public static void DamageHp()
-    {
-        playerHp--;
-    }
 }
