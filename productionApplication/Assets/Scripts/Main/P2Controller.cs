@@ -14,7 +14,7 @@ public class P2Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        script.KeyboardController();
+        //script.KeyboardController();
         foreach (string device in Microphone.devices)
         {
             if (device == "USB PnP Sound Device")

@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WallController : MonoBehaviour
 {
-    private int hp=3;
+    private int hp = 3;
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Floor")
@@ -17,7 +17,7 @@ public class WallController : MonoBehaviour
         }
         if (other.gameObject.tag == "Bomb")
         {
-            hp-=3;
+            hp -= 3;
         }
         if (hp <= 0)
             Destroy(gameObject);

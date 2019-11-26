@@ -10,6 +10,10 @@ TagManager:
   - Floor
   - Bullet2P
   - Bomb2P
+<<<<<<< HEAD
+=======
+  - Player2P
+>>>>>>> master
   layers:
   - Default
   - TransparentFX
