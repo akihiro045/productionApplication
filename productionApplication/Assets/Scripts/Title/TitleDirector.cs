@@ -107,7 +107,7 @@ public class TitleDirector : MonoBehaviour
         index = p1UI.Index(index);
 
         p1UI.UIIndicate(index);
-        p2UI.UIIndicate(index);
+        //p2UI.UIIndicate(index);
 
         p1UI.MigrationScene(index, audio, choseSE);
 

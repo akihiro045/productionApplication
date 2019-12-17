@@ -1,7 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< HEAD
-=======
 --- !u!1 &1725798644343940261
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +190,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
->>>>>>> master
 --- !u!1 &8704325946250176969
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,11 +221,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 8704325946732548350}
-<<<<<<< HEAD
-=======
   - {fileID: 7337924358787984971}
   - {fileID: 21262247912691391}
->>>>>>> master
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -362,13 +356,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-<<<<<<< HEAD
-  m_Sprite: {fileID: 21300000, guid: 74e6706309a557342b42dbe2ebdc0b62, type: 3}
-  m_Type: 0
-=======
   m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
->>>>>>> master
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

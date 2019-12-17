@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    void OnCollisionEnter(Collision other)
+    //void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.tag != "BigWall")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
     }
+
     public void Shoot(Vector3 dir)
     {
         GetComponent<Rigidbody>().AddForce(dir);
@@ -21,7 +30,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x > 15.0f || transform.position.x < -15.0f)
+        if (transform.position.x > 150.0f||transform.position.x<-150.0f)
         {
             Destroy(gameObject);
         }

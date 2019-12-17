@@ -10,9 +10,17 @@ public class CharacterVoiceController : MonoBehaviour
 
     public int playerHp=3;
     public int countBomb = 3;
+    private float fieldMaxLength = 100.0f;
+    private float fieldMinLength = 10.0f;
+    private float fieldMaxWidth = 45.0f;
+    private float fieldMinWidth= -45.0f;
+    private float moveVecX;
+    private float moveVecZ;
     // Start is called before the first frame update
     void Awake()
     {
+        moveVecX= (fieldMaxLength - fieldMinLength) / 2;
+        moveVecZ= (fieldMaxWidth - fieldMinWidth) /9;
         temp = Player.transform.position;
         oldPosition = Player.transform.position;
         FindPlayer(gameObject.tag);
@@ -23,12 +31,12 @@ public class CharacterVoiceController : MonoBehaviour
         if (tagName == "Player")
         {
             Player = GameObject.Find("Player1");
-            temp = new Vector3(-10,1.7f, 0);
+            temp = new Vector3(-100,42f, 0);
         }
         else if (tagName == "Player2P")
         {
             Player = GameObject.Find("Player2");
-            temp = new Vector3(10, 1.5f, 0);
+            temp = new Vector3(100, 42f, 0);
         }
     }
 
@@ -37,43 +45,43 @@ public class CharacterVoiceController : MonoBehaviour
         switch (direction)
         {
             case 0:
-                if (temp.z > -4.5f&&gameObject.tag=="Player")
+                if (temp.z > fieldMinWidth && gameObject.tag=="Player")
                 {
-                    temp.z -= 0.75f;
+                    temp.z -= moveVecZ;
                 }
-                if (temp.z < 4.5f && gameObject.tag == "Player2P")
+                if (temp.z < fieldMaxWidth && gameObject.tag == "Player2P")
                 {
-                    temp.z += 0.75f;
+                    temp.z += moveVecZ;
                 }
                 break;
             case 1:
-                if (temp.z < 4.5f && gameObject.tag == "Player")
+                if (temp.z < fieldMaxWidth && gameObject.tag == "Player")
                 {
-                    temp.z += 0.75f;
+                    temp.z += moveVecZ;
                 }
-                if (temp.z > -4.5f && gameObject.tag == "Player2P")
+                if (temp.z > fieldMinWidth && gameObject.tag == "Player2P")
                 {
-                    temp.z -= 0.75f;
+                    temp.z -= moveVecZ;
                 }
                 break;
             case 2:
-                if (temp.x < -1.0f && gameObject.tag == "Player")
+                if (temp.x < -fieldMinLength && gameObject.tag == "Player")
                 {
-                    temp.x += 4.5f;
+                    temp.x += moveVecX;
                 }
-                if (temp.x > 1.0f && gameObject.tag == "Player2P")
+                if (temp.x > fieldMinLength && gameObject.tag == "Player2P")
                 {
-                    temp.x -= 4.5f;
+                    temp.x -= moveVecX;
                 }
                 break;
             case 3:
-                if (temp.x > -10.0f && gameObject.tag == "Player")
+                if (temp.x > -fieldMaxLength && gameObject.tag == "Player")
                 {
-                    temp.x -= 4.5f;
+                    temp.x -= moveVecX;
                 }
-                if (temp.x < 10.0f && gameObject.tag == "Player2P")
+                if (temp.x < fieldMaxLength && gameObject.tag == "Player2P")
                 {
-                    temp.x += 4.5f;
+                    temp.x += moveVecX;
                 }
                 break;
         }
@@ -82,18 +90,22 @@ public class CharacterVoiceController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Wall2P")
         {
-            if (gameObject.tag == "Player"||gameObject.tag=="Player2P")
+            if (gameObject.tag == "Player" || gameObject.tag == "Player2P")
             {
                 temp = oldPosition;
             }
         }
-        if(other.gameObject.tag=="Bullet"||other.gameObject.tag=="Bullet2P"||other.gameObject.tag=="Bomb"||other.gameObject.tag=="Bomb2P")
+   
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet2P" || other.gameObject.tag == "Bomb" || other.gameObject.tag == "Bomb2P")
         {
             playerHp--;
         }
-   
     }
     // Update is called once per frame
     void Update()

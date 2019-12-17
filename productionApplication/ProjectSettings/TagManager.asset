@@ -10,10 +10,9 @@ TagManager:
   - Floor
   - Bullet2P
   - Bomb2P
-<<<<<<< HEAD
-=======
   - Player2P
->>>>>>> master
+  - BigWall
+  - Wall2P
   layers:
   - Default
   - TransparentFX
@@ -23,8 +22,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - UI 3D Object
   - 
   - 
   - 

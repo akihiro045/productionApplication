@@ -13,10 +13,7 @@ GameObject:
   - component: {fileID: 7318820910631078522}
   - component: {fileID: 6852992060475799877}
   - component: {fileID: -3656972822375722032}
-<<<<<<< HEAD
-=======
   - component: {fileID: -5764281364881499710}
->>>>>>> master
   m_Layer: 0
   m_Name: WallPrefab 2
   m_TagString: Wall
@@ -34,12 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.38, y: 0.8, z: 0.23065197}
   m_LocalScale: {x: 0.25, y: 1.5, z: 1}
-<<<<<<< HEAD
-  m_Children: []
-=======
   m_Children:
   - {fileID: 4251228801408667078}
->>>>>>> master
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,8 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4745a318ff9b7d458051703719be727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-=======
 --- !u!54 &-5764281364881499710
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -221,4 +212,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9188982459860395740}
   m_PrefabAsset: {fileID: 0}
->>>>>>> master
